@@ -1,0 +1,27 @@
+name: Update Pages Index
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Kører hver morgen kl. 06:00 UTC
+  workflow_dispatch:       # Manuel knap i GitHub UI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install
+      - name: Generer index.html
+        run: node update.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy til GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          exclude_assets: '.github,node_modules,package*.json,update.js'
