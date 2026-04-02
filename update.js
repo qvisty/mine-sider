@@ -117,8 +117,32 @@ async function run() {
       </a>\n`;
   });
 
-  html += `    </div>
-    <footer>Genereret automatisk fra GitHub API</footer>
+  html += `    </div>\n`;
+
+  // Eksterne sider fra JSON-fil
+  const externalPath = "external-sites.json";
+  if (fs.existsSync(externalPath)) {
+    const externalSites = JSON.parse(fs.readFileSync(externalPath, "utf8"));
+    if (externalSites.length > 0) {
+      html += `    <h2 style="margin-top:48px;margin-bottom:24px;font-size:1.6em;font-weight:700;color:#1a1a2e">Mine eksterne sider</h2>
+    <div class="grid">\n`;
+      externalSites.forEach(site => {
+        const thumbUrl = `https://image.thum.io/get/width/600/crop/380/${site.url}`;
+        html += `      <a class="card" href="${site.url}" target="_blank" rel="noopener">
+        <img class="card-img" src="${thumbUrl}" alt="Skærmbillede af ${site.name}" loading="lazy">
+        <div class="card-body">
+          <div class="card-title">${site.name}</div>
+          ${site.description ? `<div style="font-size:0.9em;color:#4b5563;margin-bottom:4px">${site.description}</div>` : ''}
+          <div class="card-url">${site.url}</div>
+        </div>
+      </a>\n`;
+      });
+      html += `    </div>\n`;
+      console.log(`Fandt ${externalSites.length} eksterne sider.`);
+    }
+  }
+
+  html += `    <footer>Genereret automatisk fra GitHub API</footer>
   </div>
 </body>\n</html>`;
   fs.writeFileSync("index.html", html);
