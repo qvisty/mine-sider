@@ -2,68 +2,182 @@
 <html lang="da">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mine GitHub Pages</title>
   <style>
-    body { font-family: sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; }
-    h1 { border-bottom: 2px solid #333; padding-bottom: 10px; }
-    .project { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-    .project strong { display: block; margin-bottom: 4px; }
-    a { color: #0066cc; }
-    .updated { font-size: 0.85em; color: #666; margin-top: 4px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      padding: 40px 20px;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-size: 2.2em;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: #6b7280;
+      font-size: 0.95em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      display: block;
+      background: #e5e7eb;
+    }
+    .card-body {
+      padding: 16px 20px;
+    }
+    .card-title {
+      font-size: 1.1em;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .card-url {
+      font-size: 0.85em;
+      color: #3b82f6;
+      word-break: break-all;
+    }
+    .card-meta {
+      font-size: 0.8em;
+      color: #9ca3af;
+      margin-top: 8px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      color: #9ca3af;
+      font-size: 0.85em;
+    }
   </style>
 </head>
 <body>
-  <h1>Mine GitHub Pages</h1>
-  <p>Sidst opdateret: 2.4.2026</p>
-  <div class="project">
-    <strong>mit-claude-setup</strong>
-    <a href="https://qvisty.github.io/mit-claude-setup/">https://qvisty.github.io/mit-claude-setup/</a>
-    <div class="updated">Sidst opdateret: 31.3.2026</div>
-  </div>
-  <div class="project">
-    <strong>Buskoordination</strong>
-    <a href="https://qvisty.github.io/Buskoordination/">https://qvisty.github.io/Buskoordination/</a>
-    <div class="updated">Sidst opdateret: 27.3.2026</div>
-  </div>
-  <div class="project">
-    <strong>mine-sider</strong>
-    <a href="https://qvisty.github.io/mine-sider/">https://qvisty.github.io/mine-sider/</a>
-    <div class="updated">Sidst opdateret: 26.3.2026</div>
-  </div>
-  <div class="project">
-    <strong>the-chronicles</strong>
-    <a href="https://qvisty.github.io/the-chronicles/">https://qvisty.github.io/the-chronicles/</a>
-    <div class="updated">Sidst opdateret: 25.3.2026</div>
-  </div>
-  <div class="project">
-    <strong>EmmerskeSoftwareVision</strong>
-    <a href="https://qvisty.github.io/EmmerskeSoftwareVision/">https://qvisty.github.io/EmmerskeSoftwareVision/</a>
-    <div class="updated">Sidst opdateret: 23.3.2026</div>
-  </div>
-  <div class="project">
-    <strong>cleaning-cost-calculator</strong>
-    <a href="https://qvisty.github.io/cleaning-cost-calculator/">https://qvisty.github.io/cleaning-cost-calculator/</a>
-    <div class="updated">Sidst opdateret: 20.3.2026</div>
-  </div>
-  <div class="project">
-    <strong>htmlcss</strong>
-    <a href="https://qvisty.github.io/htmlcss/">https://qvisty.github.io/htmlcss/</a>
-    <div class="updated">Sidst opdateret: 28.1.2024</div>
-  </div>
-  <div class="project">
-    <strong>leaflet-map-simple</strong>
-    <a href="https://qvisty.github.io/leaflet-map-simple/">https://qvisty.github.io/leaflet-map-simple/</a>
-    <div class="updated">Sidst opdateret: 12.5.2020</div>
-  </div>
-  <div class="project">
-    <strong>sidetest</strong>
-    <a href="https://qvisty.github.io/sidetest/">https://qvisty.github.io/sidetest/</a>
-    <div class="updated">Sidst opdateret: 14.12.2017</div>
-  </div>
-  <div class="project">
-    <strong>page</strong>
-    <a href="https://qvisty.github.io/page/">https://qvisty.github.io/page/</a>
-    <div class="updated">Sidst opdateret: 14.12.2017</div>
+  <div class="container">
+    <header>
+      <h1>Mine GitHub Pages</h1>
+      <p class="subtitle">Oversigt over mine projekter &middot; Opdateret 2.4.2026</p>
+    </header>
+    <div class="grid">
+      <a class="card" href="https://qvisty.github.io/mine-sider/" target="_blank" rel="noopener">
+        <img class="card-img" src="https://image.thum.io/get/width/600/crop/380/https://qvisty.github.io/mine-sider/" alt="Skærmbillede af mine-sider" loading="lazy">
+        <div class="card-body">
+          <div class="card-title">mine-sider</div>
+          
+          <div class="card-url">https://qvisty.github.io/mine-sider/</div>
+          <div class="card-meta">Sidst opdateret: 2.4.2026</div>
+        </div>
+      </a>
+      <a class="card" href="https://qvisty.github.io/mit-claude-setup/" target="_blank" rel="noopener">
+        <img class="card-img" src="https://image.thum.io/get/width/600/crop/380/https://qvisty.github.io/mit-claude-setup/" alt="Skærmbillede af mit-claude-setup" loading="lazy">
+        <div class="card-body">
+          <div class="card-title">mit-claude-setup</div>
+          
+          <div class="card-url">https://qvisty.github.io/mit-claude-setup/</div>
+          <div class="card-meta">Sidst opdateret: 31.3.2026</div>
+        </div>
+      </a>
+      <a class="card" href="https://qvisty.github.io/Buskoordination/" target="_blank" rel="noopener">
+        <img class="card-img" src="https://image.thum.io/get/width/600/crop/380/https://qvisty.github.io/Buskoordination/" alt="Skærmbillede af Buskoordination" loading="lazy">
+        <div class="card-body">
+          <div class="card-title">Buskoordination</div>
+          
+          <div class="card-url">https://qvisty.github.io/Buskoordination/</div>
+          <div class="card-meta">Sidst opdateret: 27.3.2026</div>
+        </div>
+      </a>
+      <a class="card" href="https://qvisty.github.io/the-chronicles/" target="_blank" rel="noopener">
+        <img class="card-img" src="https://image.thum.io/get/width/600/crop/380/https://qvisty.github.io/the-chronicles/" alt="Skærmbillede af the-chronicles" loading="lazy">
+        <div class="card-body">
+          <div class="card-title">the-chronicles</div>
+          
+          <div class="card-url">https://qvisty.github.io/the-chronicles/</div>
+          <div class="card-meta">Sidst opdateret: 25.3.2026</div>
+        </div>
+      </a>
+      <a class="card" href="https://qvisty.github.io/EmmerskeSoftwareVision/" target="_blank" rel="noopener">
+        <img class="card-img" src="https://image.thum.io/get/width/600/crop/380/https://qvisty.github.io/EmmerskeSoftwareVision/" alt="Skærmbillede af EmmerskeSoftwareVision" loading="lazy">
+        <div class="card-body">
+          <div class="card-title">EmmerskeSoftwareVision</div>
+          
+          <div class="card-url">https://qvisty.github.io/EmmerskeSoftwareVision/</div>
+          <div class="card-meta">Sidst opdateret: 23.3.2026</div>
+        </div>
+      </a>
+      <a class="card" href="https://qvisty.github.io/cleaning-cost-calculator/" target="_blank" rel="noopener">
+        <img class="card-img" src="https://image.thum.io/get/width/600/crop/380/https://qvisty.github.io/cleaning-cost-calculator/" alt="Skærmbillede af cleaning-cost-calculator" loading="lazy">
+        <div class="card-body">
+          <div class="card-title">cleaning-cost-calculator</div>
+          
+          <div class="card-url">https://qvisty.github.io/cleaning-cost-calculator/</div>
+          <div class="card-meta">Sidst opdateret: 20.3.2026</div>
+        </div>
+      </a>
+      <a class="card" href="https://qvisty.github.io/htmlcss/" target="_blank" rel="noopener">
+        <img class="card-img" src="https://image.thum.io/get/width/600/crop/380/https://qvisty.github.io/htmlcss/" alt="Skærmbillede af htmlcss" loading="lazy">
+        <div class="card-body">
+          <div class="card-title">htmlcss</div>
+          
+          <div class="card-url">https://qvisty.github.io/htmlcss/</div>
+          <div class="card-meta">Sidst opdateret: 28.1.2024</div>
+        </div>
+      </a>
+      <a class="card" href="https://qvisty.github.io/leaflet-map-simple/" target="_blank" rel="noopener">
+        <img class="card-img" src="https://image.thum.io/get/width/600/crop/380/https://qvisty.github.io/leaflet-map-simple/" alt="Skærmbillede af leaflet-map-simple" loading="lazy">
+        <div class="card-body">
+          <div class="card-title">leaflet-map-simple</div>
+          <div style="font-size:0.9em;color:#4b5563;margin-bottom:4px">A very simple Leaflet point map template for new users to explore, copy, and edit</div>
+          <div class="card-url">https://qvisty.github.io/leaflet-map-simple/</div>
+          <div class="card-meta">Sidst opdateret: 12.5.2020</div>
+        </div>
+      </a>
+      <a class="card" href="https://qvisty.github.io/sidetest/" target="_blank" rel="noopener">
+        <img class="card-img" src="https://image.thum.io/get/width/600/crop/380/https://qvisty.github.io/sidetest/" alt="Skærmbillede af sidetest" loading="lazy">
+        <div class="card-body">
+          <div class="card-title">sidetest</div>
+          
+          <div class="card-url">https://qvisty.github.io/sidetest/</div>
+          <div class="card-meta">Sidst opdateret: 14.12.2017</div>
+        </div>
+      </a>
+      <a class="card" href="https://qvisty.github.io/page/" target="_blank" rel="noopener">
+        <img class="card-img" src="https://image.thum.io/get/width/600/crop/380/https://qvisty.github.io/page/" alt="Skærmbillede af page" loading="lazy">
+        <div class="card-body">
+          <div class="card-title">page</div>
+          <div style="font-size:0.9em;color:#4b5563;margin-bottom:4px">min beskrivelse</div>
+          <div class="card-url">https://qvisty.github.io/page/</div>
+          <div class="card-meta">Sidst opdateret: 14.12.2017</div>
+        </div>
+      </a>
+    </div>
+    <footer>Genereret automatisk fra GitHub API</footer>
   </div>
 </body>
 </html>
