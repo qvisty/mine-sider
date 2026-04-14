@@ -2,15 +2,62 @@ const { Octokit } = require("@octokit/rest");
 const fs = require("fs");
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+const shouldSyncWebsite = process.env.SYNC_REPO_WEBSITE !== "false";
+
+async function getPublishedUrl(repo) {
+  const fallbackUrl = `https://${repo.owner.login}.github.io/${repo.name}/`;
+
+  try {
+    const { data: pages } = await octokit.repos.getPages({
+      owner: repo.owner.login,
+      repo: repo.name
+    });
+    return pages.html_url || fallbackUrl;
+  } catch (error) {
+    console.warn(`Kunne ikke hente Pages-URL for ${repo.full_name}: ${error.message}`);
+    return fallbackUrl;
+  }
+}
+
+async function syncRepoWebsiteField(repo, publishedUrl) {
+  const currentWebsite = (repo.homepage || "").trim();
+
+  if (!shouldSyncWebsite) {
+    return;
+  }
+
+  if (currentWebsite === publishedUrl) {
+    return;
+  }
+
+  await octokit.repos.update({
+    owner: repo.owner.login,
+    repo: repo.name,
+    homepage: publishedUrl
+  });
+
+  console.log(`Opdaterede Website-feltet for ${repo.full_name} -> ${publishedUrl}`);
+}
 
 async function run() {
+  const { data: currentUser } = await octokit.users.getAuthenticated();
   const { data: repos } = await octokit.repos.listForAuthenticatedUser({
     visibility: "public",
+    affiliation: "owner",
     per_page: 100,
     sort: "updated"
   });
 
-  const pagesRepos = repos.filter(repo => repo.has_pages);
+  const pagesRepos = repos.filter(
+    repo => repo.has_pages && repo.owner.login === currentUser.login
+  );
+
+  const publishedUrls = new Map();
+  for (const repo of pagesRepos) {
+    const publishedUrl = await getPublishedUrl(repo);
+    publishedUrls.set(repo.full_name, publishedUrl);
+    await syncRepoWebsiteField(repo, publishedUrl);
+  }
 
   let html = `<!DOCTYPE html>
 <html lang="da">
@@ -102,7 +149,7 @@ async function run() {
     <div class="grid">\n`;
 
   pagesRepos.forEach(repo => {
-    const url = `https://${repo.owner.login}.github.io/${repo.name}/`;
+    const url = publishedUrls.get(repo.full_name) || `https://${repo.owner.login}.github.io/${repo.name}/`;
     const thumbUrl = `https://image.thum.io/get/width/600/crop/380/${url}`;
     const updated = new Date(repo.updated_at).toLocaleDateString("da-DK");
     const description = repo.description ? repo.description : '';
@@ -147,6 +194,9 @@ async function run() {
 </body>\n</html>`;
   fs.writeFileSync("index.html", html);
   console.log(`Fandt ${pagesRepos.length} Pages-repos.`);
+  if (!shouldSyncWebsite) {
+    console.log("Website-felt synkronisering er slået fra (SYNC_REPO_WEBSITE=false).");
+  }
 }
 
 run();
