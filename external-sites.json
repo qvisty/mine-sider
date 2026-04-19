@@ -8,5 +8,10 @@
     "name": "Bogudgivelse",
     "url": "https://bogudgivelse.onrender.com/budget",
     "description": "Til at hjælpe med udgivelsen"
+  }, 
+  {
+    "name": "Nosy Neighbor",
+    "url": "https://nosyneighbour.onrender.com/",
+    "description": "Kig på offentlige data fra Tinglysning"
   }
 ]
